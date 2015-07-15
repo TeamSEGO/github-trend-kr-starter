@@ -25,7 +25,7 @@ html, body {
 .mdl-demo .mdl-layout.is-small-screen .mdl-layout__header-row h3 {
   /*font-size: inherit;*/
   font-size: 25px;
-  word-break: break-all;
+  word-break: break-word;
   width: 100%;
 }
 .mdl-demo .mdl-layout__tab-bar-button {
