@@ -73,11 +73,11 @@ html, body {
   height: auto;
 }
 .mdl-demo .mdl-card .mdl-card__supporting-text {
-  margin: 40px;
+  margin: 30px;
   flex-grow: 1;
   padding: 0;
   color: inherit;
-  width: calc(100% - 80px);
+  width: calc(100% - 60px);
 }
 .mdl-demo.mdl-demo .mdl-card__supporting-text h4 {
   margin-top: 0;
@@ -213,7 +213,25 @@ html, body {
 .mdl-demo .mdl-menu__container {
   z-index: 99;
 }
-#add{
+#add {
   background-image: url(../img/github.png);
   background-size: 56px;
+}
+.gtk-project-link {
+  text-decoration: none;
+  color: #000000;
+}
+.gtk-project-etc {
+  text-align: right;
+  padding: 10px;
+  font-size: 14px;
+}
+.mdl-card__actions.gtk-card-bottom {
+  padding: 0px;
+}
+
+.gtk-assign-btn {
+  position: absolute;
+  bottom: 12px;
+  left: 10px;
 }
