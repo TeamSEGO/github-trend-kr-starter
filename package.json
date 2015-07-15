@@ -1,0 +1,16 @@
+{
+  "name": "firebase-gtk",
+  "version": "0.0.1",
+  "description": "firebase",
+  "main": "server.js",
+  "scripts": {
+    "test": "test.js"
+  },
+  "author": "depa",
+  "license": "MIT",
+  "dependencies": {
+    "firebase": "^2.2.7",
+    "fs": "0.0.2",
+    "request": "^2.58.0"
+  }
+}
