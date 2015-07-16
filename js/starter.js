@@ -5,19 +5,19 @@ var list = [{"no":"01","title":"google/material-design-lite","desc":"Material De
 $(document).ready(function(){
   var githubTrendKr = ref.child("github_trend_kr");
 
-  ref.authWithOAuthPopup("github", function(error, authData) {
-    if (error) {
-      console.log("Login Failed!", error);
-    } else {
-      console.log("Authenticated successfully with payload:", authData);
-      console.log(authData.github.profileImageURL);
-      $('#add').css({"background-image":'url('+authData.github.profileImageURL+')'});
-    }
-  });
+  $('#oauth').click(function(){
+    ref.authWithOAuthPopup("github", function(error, authData) {
+      if (error) {
+        console.log("Login Failed!", error);
+      } else {
+        console.log("Authenticated successfully with payload:", authData);
+        console.log(authData.github.profileImageURL);
+        $('#oauth').css({"background-image":'url('+authData.github.profileImageURL+')'});
+      }
+    });
+  })
 
-  // githubTrendKr.child("019").set({
-  //   list : list
-  // });
+
   githubTrendKr.child("019").on('value',function(snap){
     snap.val().list.forEach(function(trend){
       var card = $('<div>', {class:"mdl-card mdl-cell mdl-cell--4-col mdl-shadow--2dp"}).appendTo('#list');
@@ -27,7 +27,6 @@ $(document).ready(function(){
       body.append(trend.desc);
       var bottom = $('<div>', {class:"mdl-card__actions gtk-card-bottom"}).appendTo(card);
       $('<div>',{class:"gtk-project-etc"}).appendTo(bottom).text(trend.etc);
-      // <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-shadow--4dp" id="add">
       var button = $('<button>',{class:"mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-shadow--4dp gtk-assign-btn"}).appendTo(bottom);
       button.click(assign());
     })

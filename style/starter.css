@@ -24,7 +24,7 @@ html, body {
 }
 .mdl-demo .mdl-layout.is-small-screen .mdl-layout__header-row h3 {
   /*font-size: inherit;*/
-  font-size: 25px;
+  font-size: 15px;
   word-break: break-word;
   width: 100%;
 }
@@ -100,10 +100,16 @@ html, body {
 .mdl-demo .mdl-card__supporting-text + .mdl-card__actions {
   border-top: 1px solid rgba(0, 0, 0, 0.12);
 }
-.mdl-demo #add {
+#oauth {
   position: absolute;
   right: 40px;
-  top: 36px;
+  top: 159px;
+  z-index: 999;
+}
+.mdl-demo .is-small-screen #oauth {
+  position: absolute;
+  right: 20px;
+  top: 24px;
   z-index: 999;
 }
 
@@ -213,7 +219,7 @@ html, body {
 .mdl-demo .mdl-menu__container {
   z-index: 99;
 }
-#add {
+#oauth {
   background-image: url(../img/github.png);
   background-size: 56px;
 }
