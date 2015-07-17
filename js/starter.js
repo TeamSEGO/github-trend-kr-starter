@@ -9,14 +9,14 @@ $(document).ready(function(){
   if(session){
     _session = JSON.parse(session);
     $('#oauth').css({"background-image":'url('+ _session.github.profileImageURL +')'});
-    $('#oauth-tooltip').text('bye bye');
+    $('#oauth-tooltip').text('bye bye~~');
     $('#oauth').click(function(){
       localStorage.clear();
       location.reload();
     });
   }
   else {
-    $('#oauth-tooltip').text('login plz');
+    $('#oauth-tooltip').text('login plz~~');
     $('#oauth').click(function(){
       ref.authWithOAuthPopup("github", function(error, authData) {
         if (error) {
@@ -28,7 +28,7 @@ $(document).ready(function(){
     });
   }
 
-  githubTrendKrRef.on('value',function(snap){
+  githubTrendKrRef.once('value',function(snap){
     snap.forEach(function(trend){
       var card = $('<div>', {class:"mdl-card mdl-cell mdl-cell--4-col mdl-shadow--2dp"}).appendTo('#list');
       var body = $('<div>', {class:"mdl-card__supporting-text"}).appendTo(card);
@@ -38,37 +38,37 @@ $(document).ready(function(){
       var bottom = $('<div>', {class:"mdl-card__actions gtk-card-bottom"}).appendTo(card);
       $('<div>',{class:"gtk-project-etc"}).appendTo(bottom).text(trend.val().etc);
       var button = $('<button>',{class:"mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-shadow--4dp gtk-assign-btn"}).appendTo(bottom);
-      button.click(assign(trend));
-      if(trend.val().owner){
-        button.css({"background-image":'url('+ trend.val().owner.profile +')', "background-size":"56px"});
-      }
-      // trend.ref().update({owner:{}});
-      // trend..ref().on('value', function(_snap){
-      //   console.log(_snap.val());
-      // })
+
+      trend.ref().on("value",function(_trend){
+        if(_trend.val().owner){
+          button.css({"background-image":'url('+ _trend.val().owner.profile +')', "background-size":"56px"});
+        } else {
+          $(this).css({"background-image":"none"});
+        }
+        button.unbind('click');
+        button.click(assign(_trend));
+      });
     })
   });
 });
 
 var assign = function(trend){
-  return function(){
+  return function(event){
     var _this = this;
     var session = localStorage.getItem(_sessionKey);
     if(session){
       _session = JSON.parse(session);
-        if(trend.val().owner) {
-          if(trend.val().owner.username == _session.github.username) {
-            if(confirm(trend.val().title + ' 프로젝트 선택을 취소하시겠습니까?')){
-              $(this).css({"background-image":"none"});
-              trend.ref().update({owner:{}});
-            }
-          }
-        } else {
-          if(confirm(trend.val().title + ' 프로젝트를 선택하시겠습니까?')){
-            $(this).css({"background-image":'url('+_session.github.profileImageURL+')', "background-size":"56px"});
-            trend.ref().update({owner:{ username : _session.github.username, email : _session.github.email , profile: _session.github.profileImageURL }});
+      if(trend.val().owner) {
+        if(trend.val().owner.username == _session.github.username) {
+          if(confirm(trend.val().title + ' 프로젝트 선택을 취소하시겠습니까?')){
+            trend.ref().update({owner:{}});
           }
         }
+      } else {
+        if(confirm(trend.val().title + ' 프로젝트를 선택하시겠습니까?')){
+          trend.ref().update({owner:{ username : _session.github.username, email : _session.github.email , profile: _session.github.profileImageURL }});
+        }
+      }
     } else {
       if(!trend.val().owner) {
         alert('Github 로그인 후 선택해주세요!!');
