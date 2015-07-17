@@ -43,7 +43,7 @@ $(document).ready(function(){
         if(_trend.val().owner){
           button.css({"background-image":'url('+ _trend.val().owner.profile +')', "background-size":"56px"});
         } else {
-          $(this).css({"background-image":"none"});
+          button.css({"background-image":"none"});
         }
         button.unbind('click');
         button.click(assign(_trend));
