@@ -103,7 +103,7 @@ html, body {
 #oauth {
   position: absolute;
   right: 40px;
-  top: 159px;
+  top: 223px;
   z-index: 999;
 }
 .mdl-demo .is-small-screen #oauth {
