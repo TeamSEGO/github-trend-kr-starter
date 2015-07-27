@@ -33,7 +33,7 @@ $(document).ready(function(){
       var card = $('<div>', {class:"mdl-card mdl-cell mdl-cell--4-col mdl-shadow--2dp"}).appendTo('#list');
       var body = $('<div>', {class:"mdl-card__supporting-text"}).appendTo(card);
       var title = $('<h4>').appendTo(body);
-      var link = $('<a>', {class:"gtk-project-link", href:trend.val().url, target:"_blank"}).appendTo(title).text(trend.val().title);
+      var link = $('<a>', {class:"gtk-project-link", target:"_blank"}).attr({'href':trend.val().url}).appendTo(title).text(trend.val().title);
       body.append(trend.val().desc);
       var bottom = $('<div>', {class:"mdl-card__actions gtk-card-bottom"}).appendTo(card);
       $('<div>',{class:"gtk-project-etc"}).appendTo(bottom).text(trend.val().etc);
