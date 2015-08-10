@@ -24,12 +24,12 @@ var github_trand_kr = function(){
           , "desc"     : $(list[i]).children('.repo-list-description').text().replace(/\n/gi,"").replace(/(\s{2,})/g,"")
           , "url"      : github_url + $(list[i]).children('.repo-list-name').children('a').attr('href')
           , "etc"      : $(list[i]).children('.repo-list-meta').text().replace(/\n/gi,"").replace(/(\s{2,})/g,"").replace("•Built by","").replace(" this week","")
-          , "owner"    : ''
+          , "owner"    : {}
         }
         trand_list.push(data);
         var pname = data.title.split('/')[1];
         var content =  '# ' + pname  + '\n\n- 페이지 링크: '+ data.url;
-        var fname = '019-'+ data.no + '-' + pname +'.md';
+        var fname = '021-'+ data.no + '-' + pname +'.md';
 
         write_md(fname,content);
       }
