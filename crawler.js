@@ -13,7 +13,7 @@ var init = function(cb){
 }
 
 var github_trand_kr = function(){
-  request({url : 'https://github.com/trending?since=weekly' ,  timeout: 100000}, function(error, response, body){
+  request({url : 'https://github.com/trending?since=monthly' ,  timeout: 100000}, function(error, response, body){
     if (!error && response.statusCode == 200) {
       var $ = cheerio.load(body);
       var list = $('.repo-list-item');
@@ -23,13 +23,13 @@ var github_trand_kr = function(){
           , "title"    : $(list[i]).children('.repo-list-name').text().replace(/\n/gi,"").replace(/(\s*)/g,"")
           , "desc"     : $(list[i]).children('.repo-list-description').text().replace(/\n/gi,"").replace(/(\s{2,})/g,"")
           , "url"      : github_url + $(list[i]).children('.repo-list-name').children('a').attr('href')
-          , "etc"      : $(list[i]).children('.repo-list-meta').text().replace(/\n/gi,"").replace(/(\s{2,})/g,"").replace("•Built by","").replace(" this week","")
+          , "etc"      : $(list[i]).children('.repo-list-meta').text().replace(/\n/gi,"").replace(/(\s{2,})/g,"").replace("•Built by","").replace(" this month","")
           , "owner"    : {}
         }
         trand_list.push(data);
         var pname = data.title.split('/')[1];
         var content =  '# ' + pname  + '\n\n- 페이지 링크: '+ data.url;
-        var fname = '021-'+ data.no + '-' + pname +'.md';
+        var fname = '022-'+ data.no + '-' + pname +'.md';
 
         write_md(fname,content);
       }
